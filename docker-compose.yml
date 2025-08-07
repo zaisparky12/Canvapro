@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  server:
+    build: ./server
+    env_file:
+      - ./server/.env
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+
+  client:
+    build: ./client
+    restart: always
+    ports:
+      - "3000:80"
+
+volumes:
+  db_data:

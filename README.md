@@ -124,3 +124,27 @@ Tambahkan Nginx reverse-proxy port 5000 jika diperlukan.
 ## Lisensi
 
 MIT © 2025 Canva Pro ID
+
+## Deploy dengan Docker
+
+Persiapkan file `.env` di root (digunakan oleh docker-compose untuk MySQL):
+
+```bash
+DB_PASS=yourpass
+DB_NAME=canva_pro_id
+```
+
+Kemudian jalankan:
+
+```bash
+docker compose up --build -d
+```
+
+• Frontend akan tersedia di port `3000`  
+• Backend API di port `5000`  
+• MySQL di `localhost:3306` (user: root / pass: `DB_PASS`)
+
+Stop container:
+```bash
+docker compose down
+```
